@@ -1,4 +1,8 @@
-package com.darly.token;
+package com.darly.token.ui;
+
+import com.darly.token.R;
+import com.darly.token.R.layout;
+import com.darly.token.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
