@@ -1,4 +1,8 @@
-package com.darly.tokentest;
+package com.darly.tokentest.ui;
+
+import com.darly.tokentest.R;
+import com.darly.tokentest.R.layout;
+import com.darly.tokentest.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
