@@ -1,5 +1,8 @@
-package cn.com.darly.rich;
+package cn.com.darly.rich.ui;
 
+import cn.com.darly.rich.R;
+import cn.com.darly.rich.R.layout;
+import cn.com.darly.rich.R.menu;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
