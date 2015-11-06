@@ -1,12 +1,10 @@
 package com.darly.token.ui;
 
-import com.darly.token.R;
-import com.darly.token.R.layout;
-import com.darly.token.R.menu;
-
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
+
+import com.darly.token.R;
 
 public class MainActivity extends Activity {
 
