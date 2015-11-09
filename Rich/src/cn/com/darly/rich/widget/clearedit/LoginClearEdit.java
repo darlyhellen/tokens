@@ -4,15 +4,14 @@
  * LoginClearEdit.java
  * TODO
  */
-package com.darly.tokentest.widget.clearedit;
+package cn.com.darly.rich.widget.clearedit;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.darly.tokentest.R;
+import cn.com.darly.rich.R;
 
 /**
  * @author Zhangyuhui LoginClearEdit 下午2:32:27 TODO
