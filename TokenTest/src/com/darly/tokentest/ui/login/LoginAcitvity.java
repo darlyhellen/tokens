@@ -94,7 +94,6 @@ public class LoginAcitvity extends BaseActivity {
 			Matcher matcher = pattern.matcher(name.getText().toString());
 			String newName = matcher.replaceAll("");
 			name.getText().setText(newName);
-
 			if ("18321127312".equals(name.getText().getText().toString())) {
 				if ("111111".equals(pass.getText().getText().toString())) {
 					JSONObject object = new JSONObject();
