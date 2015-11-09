@@ -83,4 +83,5 @@ public class LoginClearEdit extends LinearLayout {
 		return text;
 	}
 
+	
 }

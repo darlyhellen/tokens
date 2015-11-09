@@ -6,6 +6,9 @@
  */
 package com.darly.tokentest.ui.login;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.json.JSONObject;
 
 import android.graphics.drawable.Drawable;
@@ -86,6 +89,12 @@ public class LoginAcitvity extends BaseActivity {
 			break;
 		case R.id.act_login_login:
 			// 双用户登录。可以进行双通讯。
+			// 添加汉子匹配，图片乱码剔除在外。
+			Pattern pattern = Pattern.compile("([^\\._\\w\\u4e00-\\u9fa5])*");
+			Matcher matcher = pattern.matcher(name.getText().toString());
+			String newName = matcher.replaceAll("");
+			name.getText().setText(newName);
+
 			if ("18321127312".equals(name.getText().getText().toString())) {
 				if ("111111".equals(pass.getText().getText().toString())) {
 					JSONObject object = new JSONObject();
