@@ -27,7 +27,7 @@ public class MainActivity extends Activity {
 		Intent i = new Intent(this, UpdateService.class);
 		i.putExtra("url",
 				"http://gdown.baidu.com/data/wisegame/4091da454312f1c1/QQ_288.apk");
-//		 startService(i);
+		 startService(i);
 	}
 
 	@Override
