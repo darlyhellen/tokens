@@ -1,8 +1,9 @@
-package cn.com.darly.rich;
+package cn.com.darly.rich.ui;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
+import cn.com.darly.rich.R;
 
 public class MainActivity extends Activity {
 
