@@ -52,7 +52,6 @@ public class RoundedDrawable extends Drawable {
 	private final RectF mBorderRect = new RectF();
 	private final Paint mBorderPaint;
 	private final Matrix mShaderMatrix = new Matrix();
-
 	private BitmapShader mBitmapShader;
 	private Shader.TileMode mTileModeX = Shader.TileMode.CLAMP;
 	private Shader.TileMode mTileModeY = Shader.TileMode.CLAMP;
