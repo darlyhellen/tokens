@@ -171,8 +171,8 @@ public class PhotoPop extends PopupWindow implements OnClickListener {
 		intent.setDataAndType(uri, "image/*");
 		intent.putExtra("crop", "true");
 		// aspectX aspectY 是宽高的比例
-		intent.putExtra("aspectX", 1);
-		intent.putExtra("aspectY", 1);
+//		intent.putExtra("aspectX", 1);
+//		intent.putExtra("aspectY", 1);
 		// outputX outputY 是裁剪图片宽高
 		intent.putExtra("outputX", 150);
 		intent.putExtra("outputY", 150);

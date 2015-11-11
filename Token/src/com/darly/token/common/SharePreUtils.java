@@ -16,6 +16,8 @@ import android.content.SharedPreferences.Editor;
 public class SharePreUtils {
 
 	private static String ISFIRSTCOME = "isfirstcome";
+	
+	private static String ASSET = "asset";
 
 	/**
 	 * @param come
@@ -36,5 +38,26 @@ public class SharePreUtils {
 	public static boolean getfirstcome(Context context) {
 		return context.getSharedPreferences(ISFIRSTCOME, Context.MODE_PRIVATE)
 				.getBoolean(ISFIRSTCOME, false);
+	}
+	
+	/**
+	 * @param come
+	 *            下午1:31:00
+	 * @author zhangyh2 SharePreUtils.java TODO 记录是否是首次进入程序。
+	 */
+	public static void isasset(Context context, boolean come) {
+		Editor sp = context.getSharedPreferences(ASSET,
+				Context.MODE_PRIVATE).edit();
+		sp.putBoolean(ASSET, come);
+		sp.commit();
+	}
+
+	/**
+	 * @return 下午1:31:40
+	 * @author zhangyh2 SharePreUtils.java TODO 获取记录。
+	 */
+	public static boolean getasset(Context context) {
+		return context.getSharedPreferences(ASSET, Context.MODE_PRIVATE)
+				.getBoolean(ASSET, false);
 	}
 }

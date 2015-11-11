@@ -8,5 +8,6 @@
     <string name="grapht">从相册中选取</string>
     <string name="consel">取消</string>
     <string name="loading">加载中....</string>
+    <string name="loadassets">添加库文件</string>
 
 </resources>

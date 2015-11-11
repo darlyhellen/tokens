@@ -1,12 +1,16 @@
 package com.darly.token.ui;
 
 import java.io.File;
-import java.util.Calendar;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,13 +21,16 @@ import android.widget.TextView;
 import com.darly.token.R;
 import com.darly.token.app.Constract;
 import com.darly.token.base.BaseActivity;
-import com.darly.token.service.UpdateService;
+import com.darly.token.common.CopyAssets;
+import com.darly.token.common.SharePreUtils;
+import com.darly.token.widget.load.DialogAssetsUtil;
 import com.darly.token.widget.load.ProgressDialogUtil;
 import com.darly.token.widget.photoutil.PhotoPop;
 import com.googlecode.tesseract.android.TessBaseAPI;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
+@SuppressLint("HandlerLeak")
 @ContentView(R.layout.activity_main)
 public class MainActivity extends BaseActivity {
 
@@ -45,11 +52,40 @@ public class MainActivity extends BaseActivity {
 	 * 上午9:29:04 TODO 调出选项的POP窗口，主要为相机，相册，取消
 	 */
 	private PhotoPop pop;
-
 	/**
 	 * 上午9:30:17 TODO 加载动画。
 	 */
 	private ProgressDialogUtil loading;
+
+	private DialogAssetsUtil dialog;
+
+	private String language = "chi_sim";
+
+	public Handler ha = new Handler() {
+
+		@Override
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case 1:
+				dialog.setFilename("加载完成");
+				SharePreUtils.isasset(MainActivity.this, true);
+				dialog.dismiss();
+				break;
+			case 2:
+				String name = (String) msg.obj;
+				dialog.setFilename("正在加载" + name);
+				break;
+			case 3:
+				int a = (Integer) msg.obj;
+				dialog.setProgress(a);
+				break;
+
+			default:
+				break;
+			}
+		}
+
+	};
 
 	/*
 	 * (non-Javadoc)
@@ -77,22 +113,29 @@ public class MainActivity extends BaseActivity {
 	@Override
 	public void initView(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		Log.i("1111111", Calendar.DAY_OF_MONTH + "");
-
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.DAY_OF_MONTH, Calendar.DAY_OF_MONTH + 20);
-		Log.i("1111111", calendar.get(Calendar.DAY_OF_MONTH) + "");
-
-		Intent i = new Intent(this, UpdateService.class);
-		i.putExtra("url",
-				"http://gdown.baidu.com/data/wisegame/4091da454312f1c1/QQ_288.apk");
-//		startService(i);
+		// Log.i("1111111", Calendar.DAY_OF_MONTH + "");
+		//
+		// Calendar calendar = Calendar.getInstance();
+		// calendar.set(Calendar.DAY_OF_MONTH, Calendar.DAY_OF_MONTH + 20);
+		// Log.i("1111111", calendar.get(Calendar.DAY_OF_MONTH) + "");
+		//
+		// Intent i = new Intent(this, UpdateService.class);
+		// i.putExtra("url",
+		// "http://gdown.baidu.com/data/wisegame/4091da454312f1c1/QQ_288.apk");
+		// startService(i);
 
 		pop = new PhotoPop(this);
-
 		more.setOnClickListener(this);
 		loading = new ProgressDialogUtil(this);
 		loading.setMessage(R.string.loading);
+
+		dialog = new DialogAssetsUtil(this);
+		if (!SharePreUtils.getasset(this)) {
+			dialog.show();
+			// 设置任务栏中下载进程显示的views
+			new Asy(this).execute();
+
+		}
 	}
 
 	/*
@@ -146,6 +189,8 @@ public class MainActivity extends BaseActivity {
 			if (data != null) {
 				Bundle extras = data.getExtras();
 				Bitmap head = extras.getParcelable("data");
+				getWord(head);
+				Log.i("getWord",head.getWidth() + "---" + head.getHeight());
 				ImageView imageView = new ImageView(MainActivity.this);
 				LayoutParams lp = new LayoutParams(Constract.width / 5,
 						Constract.width / 5);
@@ -153,9 +198,9 @@ public class MainActivity extends BaseActivity {
 				imageView.setLayoutParams(lp);
 				imageView.setImageBitmap(head);
 				container.addView(imageView, container.getChildCount() - 1);
-				getWord(head);
 			}
 		} else {
+
 			// 拍照或相册
 			String head_path = null;
 			if (data == null) {
@@ -207,7 +252,7 @@ public class MainActivity extends BaseActivity {
 		// 如果tessdata这个目录放在sd卡的根目录
 		// 那么path直接传入sd卡的目录
 		// eng就是英文，关于语言，按ISO 639-3标准的代码就行，具体请移步wiki
-		baseApi.init(Constract.ROOT, "eng");
+		baseApi.init(Constract.ROOT, language);
 		// 设置要ocr的图片bitmap
 		baseApi.setImage(head);
 		// 根据Init的语言，获得ocr后的字符串
@@ -217,7 +262,31 @@ public class MainActivity extends BaseActivity {
 		// 如果连续ocr多张图片，这个end可以不调用，但每次ocr之后，必须调用clear来对bitmap进行释放
 		// 释放native内存
 		baseApi.end();
-		tv.setText(text);
+		StringBuilder builder = new StringBuilder();
+		builder.append(tv.getText().toString());
+		builder.append("\r\n");
+		builder.append(text);
+		tv.setText(builder.toString());
 	}
 
+	class Asy extends AsyncTask<Object, Object, Object> {
+		private Context context;
+
+		public Asy(Context context) {
+			this.context = context;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see android.os.AsyncTask#doInBackground(java.lang.Object[])
+		 */
+		@Override
+		protected Object doInBackground(Object... params) {
+			// TODO Auto-generated method stub
+			CopyAssets.copyAssets(context, ha);
+			return null;
+		}
+
+	}
 }
