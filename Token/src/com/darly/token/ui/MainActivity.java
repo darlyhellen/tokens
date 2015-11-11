@@ -1,6 +1,7 @@
 package com.darly.token.ui;
 
 import java.io.File;
+import java.util.Random;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -134,7 +135,6 @@ public class MainActivity extends BaseActivity {
 			dialog.show();
 			// 设置任务栏中下载进程显示的views
 			new Asy(this).execute();
-
 		}
 	}
 
@@ -146,7 +146,11 @@ public class MainActivity extends BaseActivity {
 	@Override
 	public void initData() {
 		// TODO Auto-generated method stub
-
+		if (new Random().nextBoolean()) {
+			language = "chi_sim";
+		}else {
+			language = "eng";
+		}
 	}
 
 	/*
