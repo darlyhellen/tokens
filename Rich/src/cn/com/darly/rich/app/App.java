@@ -7,6 +7,7 @@
  */
 package cn.com.darly.rich.app;
 
+import cn.jpush.android.api.JPushInterface;
 import android.app.Application;
 import android.content.Context;
 import android.view.WindowManager;
@@ -39,6 +40,8 @@ public class App extends Application {
 		super.onCreate();
 		instance = this;
 		getScreem();
+		JPushInterface.setDebugMode(true);
+		JPushInterface.init(this);
 	}
 
 	/**

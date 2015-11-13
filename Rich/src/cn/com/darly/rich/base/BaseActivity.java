@@ -2,13 +2,14 @@ package cn.com.darly.rich.base;
 
 import java.util.List;
 
-import com.lidroid.xutils.ViewUtils;
-import com.lidroid.xutils.util.LogUtils;
-
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import cn.jpush.android.api.JPushInterface;
+
+import com.lidroid.xutils.ViewUtils;
+import com.lidroid.xutils.util.LogUtils;
 
 /**
  * @ClassName: BaseActivity
@@ -25,13 +26,19 @@ public abstract class BaseActivity extends FragmentActivity implements
 
 	protected ActivityHandler handler;
 
+	public static boolean isForeground = false;
+	public static final String MESSAGE_RECEIVED_ACTION = "com.example.jpushdemo.MESSAGE_RECEIVED_ACTION";
+	public static final String KEY_TITLE = "title";
+	public static final String KEY_MESSAGE = "message";
+	public static final String KEY_EXTRAS = "extras";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		ViewUtils.inject(this);// 注入view和事件
 		LogUtils.customTagPrefix = "xUtilsSample"; // 方便调试时过滤 adb logcat 输出
-		LogUtils.allowI = false; // 关闭 LogUtils.i(...) 的 adb log 输出
+		LogUtils.allowI = true; // 关闭 LogUtils.i(...) 的 adb log 输出
 		if (handler == null) {
 			handler = new ActivityHandler(this);
 		}
@@ -42,6 +49,8 @@ public abstract class BaseActivity extends FragmentActivity implements
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
+		isForeground = true;
+		JPushInterface.onResume(this);
 		super.onResume();
 	}
 
@@ -53,6 +62,8 @@ public abstract class BaseActivity extends FragmentActivity implements
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
+		isForeground = false;
+		JPushInterface.onPause(this);
 		super.onPause();
 	}
 
