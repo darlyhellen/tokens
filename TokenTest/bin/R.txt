@@ -1731,11 +1731,13 @@ int string mobile_contact 0x7f0c006b
 int string mobile_list_empty 0x7f0c006c
 int string mute 0x7f0c0200
 int string net_warning 0x7f0c0195
+int string neterror 0x7f0c0208
 int string network_dial_number_format 0x7f0c0190
 int string new_msg_mute_notify 0x7f0c00bf
 int string new_msg_notify 0x7f0c00c0
 int string new_update_version 0x7f0c012f
 int string news_notify 0x7f0c00b8
+int string no 0x7f0c0207
 int string no_support_sip 0x7f0c0198
 int string not_updated_yet 0x7f0c0062
 int string notification_fmt_one_filetype 0x7f0c0055
@@ -1975,6 +1977,7 @@ int string whats_new_title_2 0x7f0c0179
 int string whats_new_title_3 0x7f0c017a
 int string whats_new_title_4 0x7f0c017b
 int string whatsnew_start 0x7f0c017c
+int string yes 0x7f0c0206
 int style AppBaseTheme 0x7f0d0000
 int style AppTheme 0x7f0d000f
 int style BaseAppTheme 0x7f0d000e
