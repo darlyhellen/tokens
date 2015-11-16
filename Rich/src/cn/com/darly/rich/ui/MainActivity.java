@@ -106,8 +106,9 @@ public class MainActivity extends BaseActivity {
 				LogUtils.i(showMsg.toString());
 				marq.setText(showMsg);
 				TranslateAnimation animation = new TranslateAnimation(
-						Constract.width, -marq.getWidth(), 0, 0);
-				animation.setDuration(3000);
+						Constract.width, -Constract.width, 0, 0);
+				animation.getFillAfter();
+				animation.setDuration(10000);
 				marq.setAnimation(animation);
 			}
 		}
