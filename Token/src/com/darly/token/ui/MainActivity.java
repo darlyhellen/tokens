@@ -1,6 +1,7 @@
 package com.darly.token.ui;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Random;
 
 import android.annotation.SuppressLint;
@@ -14,6 +15,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -48,6 +50,8 @@ public class MainActivity extends BaseActivity {
 
 	@ViewInject(R.id.me_details_text)
 	private TextView tv;
+	@ViewInject(R.id.me_details_flip)
+	private Button flip;
 
 	/**
 	 * 上午9:29:04 TODO 调出选项的POP窗口，主要为相机，相册，取消
@@ -100,6 +104,9 @@ public class MainActivity extends BaseActivity {
 		case R.id.me_details_more:
 			pop.show(v);
 			break;
+		case R.id.me_details_flip:
+			startActivity(new Intent(this, FlipButtonActivity.class));
+			break;
 
 		default:
 			break;
@@ -131,6 +138,7 @@ public class MainActivity extends BaseActivity {
 		loading.setMessage(R.string.loading);
 
 		dialog = new DialogAssetsUtil(this);
+		SharePreUtils.isasset(MainActivity.this, false);
 		if (!SharePreUtils.getasset(this)) {
 			dialog.show();
 			// 设置任务栏中下载进程显示的views
@@ -146,9 +154,10 @@ public class MainActivity extends BaseActivity {
 	@Override
 	public void initData() {
 		// TODO Auto-generated method stub
+		flip.setOnClickListener(this);
 		if (new Random().nextBoolean()) {
 			language = "chi_sim";
-		}else {
+		} else {
 			language = "eng";
 		}
 	}
@@ -194,7 +203,7 @@ public class MainActivity extends BaseActivity {
 				Bundle extras = data.getExtras();
 				Bitmap head = extras.getParcelable("data");
 				getWord(head);
-				Log.i("getWord",head.getWidth() + "---" + head.getHeight());
+				Log.i("getWord", head.getWidth() + "---" + head.getHeight());
 				ImageView imageView = new ImageView(MainActivity.this);
 				LayoutParams lp = new LayoutParams(Constract.width / 5,
 						Constract.width / 5);
@@ -288,7 +297,11 @@ public class MainActivity extends BaseActivity {
 		@Override
 		protected Object doInBackground(Object... params) {
 			// TODO Auto-generated method stub
-			CopyAssets.copyAssets(context, ha);
+			// CopyAssets.copyAssets(context, ha);
+			ArrayList<String> data = new ArrayList<String>();
+			data.add("http://dlsw.baidu.com/sw-search-sp/soft/3a/12350/QQ_7.8.16379.0_setup.1446522220.exe");
+			data.add("http://dlsw.baidu.com/sw-search-sp/soft/b1/38200/WeChat_1.5.0.33_setup.1446175356.exe");
+			CopyAssets.downAssets(context, data, ha);
 			return null;
 		}
 

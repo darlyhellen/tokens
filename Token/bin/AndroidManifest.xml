@@ -30,6 +30,8 @@
         </activity>
         <activity android:name="com.darly.token.ui.MainActivity" >
         </activity>
+        <activity android:name="com.darly.token.ui.FlipButtonActivity" >
+        </activity>
 
         <service android:name="com.darly.token.service.UpdateService" >
         </service>
