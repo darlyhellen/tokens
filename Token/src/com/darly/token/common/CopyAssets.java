@@ -77,10 +77,12 @@ public class CopyAssets {
 				out = null;
 			} catch (IOException e) {
 				Log.e("tag", "Failed to copy asset file: " + filename, e);
+				Message message = ha.obtainMessage(1);
+				ha.sendMessage(message);
 			}
-			Message message = ha.obtainMessage(1);
-			ha.sendMessage(message);
 		}
+		Message message = ha.obtainMessage(1);
+		ha.sendMessage(message);
 	}
 
 	private static void copyDown(long length, InputStream in, OutputStream out,
@@ -136,11 +138,12 @@ public class CopyAssets {
 				out = null;
 			} catch (IOException e) {
 				Log.e("tag", "Failed to copy asset file: " + filename, e);
+				Message message = ha.obtainMessage(1);
+				ha.sendMessage(message);
 			}
-
-			Message message = ha.obtainMessage(1);
-			ha.sendMessage(message);
 		}
+		Message message = ha.obtainMessage(1);
+		ha.sendMessage(message);
 	}
 
 	private static void copyFile(InputStream in, OutputStream out, Handler ha)

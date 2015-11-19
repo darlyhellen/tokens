@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.darly.token"
+    android:allowBackup="true"
+    android:installLocation="auto"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -32,6 +34,12 @@
         </activity>
         <activity android:name="com.darly.token.ui.FlipButtonActivity" >
         </activity>
+        <activity android:name="com.darly.token.ui.ChartDemo" >
+        </activity>
+        <activity android:name="com.darly.token.ui.GeneratedChartDemo" />
+        <activity android:name="com.darly.token.ui.chart.XYChartBuilder" />
+        <activity android:name="com.darly.token.ui.chart.PieChartBuilder" />
+        <activity android:name="org.achartengine.GraphicalActivity" />
 
         <service android:name="com.darly.token.service.UpdateService" >
         </service>

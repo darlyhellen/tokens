@@ -26,6 +26,7 @@ import com.darly.token.app.Constract;
 import com.darly.token.base.BaseActivity;
 import com.darly.token.common.CopyAssets;
 import com.darly.token.common.SharePreUtils;
+import com.darly.token.ui.chart.TemperatureChart;
 import com.darly.token.widget.load.DialogAssetsUtil;
 import com.darly.token.widget.load.ProgressDialogUtil;
 import com.darly.token.widget.photoutil.PhotoPop;
@@ -52,6 +53,8 @@ public class MainActivity extends BaseActivity {
 	private TextView tv;
 	@ViewInject(R.id.me_details_flip)
 	private Button flip;
+	@ViewInject(R.id.me_details_achart)
+	private Button chart;
 
 	/**
 	 * 上午9:29:04 TODO 调出选项的POP窗口，主要为相机，相册，取消
@@ -107,6 +110,9 @@ public class MainActivity extends BaseActivity {
 		case R.id.me_details_flip:
 			startActivity(new Intent(this, FlipButtonActivity.class));
 			break;
+		case R.id.me_details_achart:
+			startActivity(new TemperatureChart().execute(this));
+			break;
 
 		default:
 			break;
@@ -138,7 +144,7 @@ public class MainActivity extends BaseActivity {
 		loading.setMessage(R.string.loading);
 
 		dialog = new DialogAssetsUtil(this);
-		SharePreUtils.isasset(MainActivity.this, false);
+		// SharePreUtils.isasset(MainActivity.this, false);
 		if (!SharePreUtils.getasset(this)) {
 			dialog.show();
 			// 设置任务栏中下载进程显示的views
@@ -155,6 +161,7 @@ public class MainActivity extends BaseActivity {
 	public void initData() {
 		// TODO Auto-generated method stub
 		flip.setOnClickListener(this);
+		chart.setOnClickListener(this);
 		if (new Random().nextBoolean()) {
 			language = "chi_sim";
 		} else {
