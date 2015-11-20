@@ -12,7 +12,7 @@
         android:layout_weight="1"
         android:gravity="center" />
 
-    <com.darly.activities.widget.clearedit.ClearEditText
+    <com.darly.tokentest.widget.clearedit.ClearEditText
         android:id="@+id/login_clear_edit"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
