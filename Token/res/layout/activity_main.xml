@@ -42,7 +42,14 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        android:text="翻页" />
+        android:text="竖向翻页" />
+    
+    <Button
+        android:id="@+id/me_details_curl"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:text="横向翻页" />
 
     <Button
         android:id="@+id/me_details_achart"

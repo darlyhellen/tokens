@@ -55,6 +55,8 @@ public class MainActivity extends BaseActivity {
 	private Button flip;
 	@ViewInject(R.id.me_details_achart)
 	private Button chart;
+	@ViewInject(R.id.me_details_curl)
+	private Button curl;
 
 	/**
 	 * 上午9:29:04 TODO 调出选项的POP窗口，主要为相机，相册，取消
@@ -110,6 +112,9 @@ public class MainActivity extends BaseActivity {
 		case R.id.me_details_flip:
 			startActivity(new Intent(this, FlipButtonActivity.class));
 			break;
+		case R.id.me_details_curl:
+			startActivity(new Intent(this, CurlActivity.class));
+			break;
 		case R.id.me_details_achart:
 			startActivity(new TemperatureChart().execute(this));
 			break;
@@ -161,6 +166,7 @@ public class MainActivity extends BaseActivity {
 	public void initData() {
 		// TODO Auto-generated method stub
 		flip.setOnClickListener(this);
+		curl.setOnClickListener(this);
 		chart.setOnClickListener(this);
 		if (new Random().nextBoolean()) {
 			language = "chi_sim";

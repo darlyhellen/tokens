@@ -40,6 +40,8 @@
         <activity android:name="com.darly.token.ui.chart.XYChartBuilder" />
         <activity android:name="com.darly.token.ui.chart.PieChartBuilder" />
         <activity android:name="org.achartengine.GraphicalActivity" />
+        <activity android:name="com.darly.token.ui.CurlActivity" >
+        </activity>
 
         <service android:name="com.darly.token.service.UpdateService" >
         </service>
