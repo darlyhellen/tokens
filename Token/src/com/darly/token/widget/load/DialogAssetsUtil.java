@@ -4,10 +4,12 @@ import android.app.Dialog;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.WindowManager;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.darly.token.R;
+import com.darly.token.app.Constract;
 
 public class DialogAssetsUtil extends Dialog {
 	protected Context context;
@@ -36,6 +38,7 @@ public class DialogAssetsUtil extends Dialog {
 	public void onWindowFocusChanged(boolean hasFocus) {
 		filename = (TextView) findViewById(R.id.tvProcess);
 		filepro = (ProgressBar) findViewById(R.id.pbDownload);
+		filepro.setLayoutParams(new LayoutParams(Constract.width / 2, 12));
 	}
 
 	private void init() {
