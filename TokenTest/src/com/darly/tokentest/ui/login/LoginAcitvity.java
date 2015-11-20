@@ -26,8 +26,13 @@ import android.widget.TextView;
 import com.darly.tokentest.R;
 import com.darly.tokentest.app.Constract;
 import com.darly.tokentest.base.BaseActivity;
+import com.darly.tokentest.common.HttpReq;
 import com.darly.tokentest.common.ToastApp;
 import com.darly.tokentest.widget.clearedit.LoginClearEdit;
+import com.google.gson.JsonArray;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.util.LogUtils;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -94,6 +99,8 @@ public class LoginAcitvity extends BaseActivity {
 			Matcher matcher = pattern.matcher(name.getText().toString());
 			String newName = matcher.replaceAll("");
 			name.getText().setText(newName);
+			loginAccsess(name.getText().getText().toString(), pass.getText()
+					.getText().toString());
 			if ("18321127312".equals(name.getText().getText().toString())) {
 				if ("111111".equals(pass.getText().getText().toString())) {
 					JSONObject object = new JSONObject();
@@ -139,6 +146,44 @@ public class LoginAcitvity extends BaseActivity {
 		default:
 			break;
 		}
+	}
+
+	/**
+	 * @param string
+	 * @param string2
+	 *            下午5:11:48
+	 * @author zhangyh2 LoginAcitvity.java TODO 登录请求。
+	 */
+	private void loginAccsess(String name, String pass) {
+		// TODO Auto-generated method stub
+		JSONObject s = new JSONObject();
+		try {
+			JSONObject ob = new JSONObject();
+			ob.put("name", name);
+			ob.put("pass", pass);
+			s.put("params", ob.toString());
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		HttpReq.doPost(
+				"https://github.com/darlyhellen/tokens/blob/token_test/main.html",
+				s.toString(), new RequestCallBack<String>() {
+
+					@Override
+					public void onFailure(HttpException arg0, String arg1) {
+						// TODO Auto-generated method stub
+						// 网络连接失败
+						ToastApp.showToast(LoginAcitvity.this, "网络连接失败，请检查网络");
+					}
+
+					@Override
+					public void onSuccess(ResponseInfo<String> arg0) {
+						// TODO Auto-generated method stub
+						// 网络连接成功
+						LogUtils.i(arg0.result);
+					}
+				});
 	}
 
 	/*

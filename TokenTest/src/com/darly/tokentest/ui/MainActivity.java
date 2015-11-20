@@ -4,10 +4,15 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
 import com.darly.tokentest.R;
+import com.darly.tokentest.ui.login.LoginAcitvity;
 import com.darly.tokentest.widget.numberprogressbar.NumberProgressBar;
 import com.darly.tokentest.widget.numberprogressbar.OnProgressBarListener;
 
@@ -35,6 +40,16 @@ public class MainActivity extends Activity implements OnProgressBarListener {
 				});
 			}
 		}, 1000, 100);
+
+		Button btn = (Button) findViewById(R.id.main_login);
+		btn.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				startActivity(new Intent(MainActivity.this, LoginAcitvity.class));
+			}
+		});
 
 	}
 

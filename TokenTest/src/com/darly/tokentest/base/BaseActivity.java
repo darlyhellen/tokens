@@ -31,7 +31,7 @@ public abstract class BaseActivity extends FragmentActivity implements
 
 		ViewUtils.inject(this);// 注入view和事件
 		LogUtils.customTagPrefix = "xUtilsSample"; // 方便调试时过滤 adb logcat 输出
-		LogUtils.allowI = false; // 关闭 LogUtils.i(...) 的 adb log 输出
+		LogUtils.allowI = true; // 关闭 LogUtils.i(...) 的 adb log 输出
 		if (handler == null) {
 			handler = new ActivityHandler(this);
 		}
