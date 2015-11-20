@@ -7,9 +7,11 @@
  */
 package cn.com.darly.rich.app;
 
+import cn.com.darly.rich.service.BackService;
 import cn.jpush.android.api.JPushInterface;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.view.WindowManager;
 
 /**
@@ -42,6 +44,8 @@ public class App extends Application {
 		getScreem();
 		JPushInterface.setDebugMode(true);
 		JPushInterface.init(this);
+		//直接启动服务。
+		startService(new Intent(instance, BackService.class));
 	}
 
 	/**
